@@ -20,5 +20,5 @@ See all Purchases, Add Purchase, Edit Purchase, Delete Purchase
 View Sales and purchase report
 
 Login Details:
-Username: admin
+Username: admin@gmail.com
 Password: admin123
