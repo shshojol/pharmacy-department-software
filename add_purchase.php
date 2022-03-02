@@ -86,60 +86,17 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="col-sm-6 col-md-3">
                             <div class="form-group">
-                                <label>Department <span class="text-danger">*</span></label>
-                                <select class="form-control">
-                                    <option>Select Department</option>
-                                    <option>Dentists</option>
-                                    <option>Neurology</option>
+                                <label>Payment Type<span class="text-danger">*</span></label>
+                                <select class="form-control" name="payment-type">
+                                    <option value="0">Cash Payment</option>
+                                    <option value="1">Banking</option>
+                                    <option value="2">Payment Due</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-md-3">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input class="form-control" type="email">
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="form-group">
-                                <label>Tax</label>
-                                <select class="form-control">
-                                    <option>Select Tax</option>
-                                    <option>VAT</option>
-                                    <option>GST</option>
-                                    <option>No Tax</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="form-group">
-                                <label>Patient Address</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="form-group">
-                                <label>Billing Address</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="form-group">
-                                <label>Invoice date <span class="text-danger">*</span></label>
-                                <div class="cal-icon">
-                                    <input class="form-control datetimepicker" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="form-group">
-                                <label>Due Date <span class="text-danger">*</span></label>
-                                <div class="cal-icon">
-                                    <input class="form-control datetimepicker" type="text">
-                                </div>
-                            </div>
-                        </div>
+
+
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
@@ -147,101 +104,71 @@ if (isset($_POST['submit'])) {
                                 <table class="table table-hover table-white">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20px">#</th>
-                                            <th class="col-sm-2">Item</th>
-                                            <th class="col-md-6">Description</th>
-                                            <th style="width:100px;">Unit Cost</th>
-                                            <th style="width:80px;">Qty</th>
-                                            <th>Amount</th>
+                                            <th style="width: 120px;">#</th>
+                                            <th  class="col-sm-2">Medicine</th>
+
+                                            <th >Rate</th>
+                                            <th >Quantity</th>
+                                            <th >Amount</th>
+                                            <th> </th>
                                             <th> </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
+                                        <tr id="master">
                                             <td>
-                                                <input class="form-control" type="text" style="min-width:150px">
+                                                <input class="form-control sl" type="text" >
                                             </td>
                                             <td>
-                                                <input class="form-control" type="text" style="min-width:150px">
+                                                <input class="form-control product" type="text" >
+                                            </td>
+
+                                            <td>
+                                                <input class="form-control rate"  type="text">
                                             </td>
                                             <td>
-                                                <input class="form-control" style="width:100px" type="text">
+                                                <input class="form-control quantity"  type="text">
                                             </td>
                                             <td>
-                                                <input class="form-control" style="width:80px" type="text">
+                                                <input class="form-control form-amt amount" readonly=""  type="text">
                                             </td>
                                             <td>
-                                                <input class="form-control form-amt" readonly="" style="width:120px" type="text">
+                                                <!-- <a href="#" class="add" class="text-success font-18" title="Add"><i class="fa fa-plus"></i></a> -->
+                                                <input type="button" class="btn btn-primary add" value="ADD">
                                             </td>
-                                            <td><a href="javascript:void(0)" class="text-success font-18" title="Add"><i class="fa fa-plus"></i></a></td>
+                                            <td>
+                                                <!-- <input type="button" value="&times;" class="del" /> -->
+                                                <input type="button" class="btn btn-danger del" value="REMOVE">
+                                            </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>
-                                                <input class="form-control" type="text" style="min-width:150px">
-                                            </td>
-                                            <td>
-                                                <input class="form-control" type="text" style="min-width:150px">
-                                            </td>
-                                            <td>
-                                                <input class="form-control" style="width:100px" type="text">
-                                            </td>
-                                            <td>
-                                                <input class="form-control" style="width:80px" type="text">
-                                            </td>
-                                            <td>
-                                                <input class="form-control form-amt" readonly="" style="width:120px" type="text">
-                                            </td>
-                                            <td><a href="javascript:void(0)" class="text-danger font-18" title="Remove"><i class="fa fa-trash-o"></i></a></td>
-                                        </tr>
+                                   
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2">Total</th>
+                                            <th><span id="total_qty"></span> Items</th>
+                                            <th></th>
+                                            <th>Grand Total</th>
+                                            <th><span id="total_amt"></span> tk</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
-                            <div class="table-responsive">
+                            <!-- <div class="table-responsive">
                                 <table class="table table-hover table-white">
-                                    <tbody>
+                                    <tfoot>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="text-right">Total</td>
-                                            <td style="text-align: right; padding-right: 30px;width: 230px">0</td>
+                                            <th colspan="2">Total</th>
+                                            <th><span id="total_qty"></span> Items</th>
+                                            <th></th>
+                                            <th>Grand Total</th>
+                                            <th><span id="total_amt"></span> tk</th>
+                                            <th></th>
                                         </tr>
-                                        <tr>
-                                            <td colspan="5" class="text-right">Tax</td>
-                                            <td style="text-align: right; padding-right: 30px;width: 230px">
-                                                <input class="form-control text-right form-amt" value="0" readonly="" type="text">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5" class="text-right">
-                                                Discount %
-                                            </td>
-                                            <td style="text-align: right; padding-right: 30px;width: 230px">
-                                                <input class="form-control text-right" type="text">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5" style="text-align: right; font-weight: bold">
-                                                Grand Total
-                                            </td>
-                                            <td style="text-align: right; padding-right: 30px; font-weight: bold; font-size: 16px;width: 230px">
-                                                $ 0.00
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                    </tfoot>
                                 </table>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Other Information</label>
-                                        <textarea class="form-control"></textarea>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="text-center m-t-20">
@@ -252,215 +179,7 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-    <div class="notification-box">
-        <div class="msg-sidebar notifications msg-noti">
-            <div class="topnav-dropdown-header">
-                <span>Messages</span>
-            </div>
-            <div class="drop-scroll msg-list-scroll" id="msg_list">
-                <ul class="list-box">
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">R</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author">Richard Miles </span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item new-message">
-                                <div class="list-left">
-                                    <span class="avatar">J</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author">John Doe</span>
-                                    <span class="message-time">1 Aug</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">T</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author"> Tarah Shropshire </span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">M</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author">Mike Litorus</span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">C</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author"> Catherine Manseau </span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">D</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author"> Domenic Houston </span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">B</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author"> Buster Wigton </span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">R</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author"> Rolland Webber </span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">C</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author"> Claire Mapes </span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">M</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author">Melita Faucher</span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">J</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author">Jeffery Lalor</span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">L</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author">Loren Gatlin</span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="chat.html">
-                            <div class="list-item">
-                                <div class="list-left">
-                                    <span class="avatar">T</span>
-                                </div>
-                                <div class="list-body">
-                                    <span class="message-author">Tarah Shropshire</span>
-                                    <span class="message-time">12:28 AM</span>
-                                    <div class="clearfix"></div>
-                                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="topnav-dropdown-footer">
-                <a href="chat.html">See all messages</a>
-            </div>
-        </div>
-    </div>
+
 </div>
 </div>
 <div class="sidebar-overlay" data-reff=""></div>
@@ -471,6 +190,48 @@ if (isset($_POST['submit'])) {
 <script src="assets/js/Chart.bundle.js"></script>
 <script src="assets/js/chart.js"></script>
 <script src="assets/js/app.js"></script>
+<script>
+    $(document).ready(function() {
+        //add row
+        $("table").on("click", ".add", function() {
+            // Clone the #master, remove the id from the clone and append it to body.
+            $('#master').clone().removeAttr('id').appendTo('tbody');
+        });
+
+
+        //delete row
+        $("table").on("click", ".del", function() {
+            // Remove the parent TR tag completely from DOM.
+            $(this).closest("tr").remove();
+        });
+
+        $('table').on('input', 'input', function() {
+            $('tbody tr').each(function() {
+                // Cache the value of the current row.
+                $this = $(this);
+
+                // Do this only if this is not the master row.
+                //if (this.id != "master")
+
+                // Set the value of .Amount here (making sure you set it to integer multiplying two values).
+                $this.find(".amount").val(+$this.find(".quantity").val() * +$(this).find(".rate").val());
+
+                $("#total_amt, #total_qty").text(0);
+
+                $(".amount").each(function() {
+                    if (this.value != "")
+                        $("#total_amt").text(parseInt($("#total_amt").text()) + parseInt($(this).val()));
+                });
+                $(".quantity").each(function() {
+                    if (this.value != "")
+                        $("#total_qty").text(parseInt($("#total_qty").text()) + parseInt($(this).val()));
+                });
+
+            });
+        });
+
+    });
+</script>
 
 </body>
 
