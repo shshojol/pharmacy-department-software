@@ -7,54 +7,6 @@ include('include/db_conn.php');
 include('include/header.php');
 include('include/sidebar.php');
 
-$name = '';
-$email = '';
-$contact = '';
-$address = '';
-
-
-$ename = '';
-$eemail = '';
-$econtact = '';
-$eaddress = '';
-
-
-if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $contact = $_POST['contact'];
-    $address = $_POST['address'];
-
-
-    $er = 0;
-    if (empty($name)) {
-        $er++;
-        $ename = "Required";
-    }
-    if (empty($email)) {
-        $er++;
-        $eemail = "Required";
-    }
-    if (empty($contact)) {
-        $er++;
-        $econtact = "Required";
-    }
-    if (empty($address)) {
-        $er++;
-        $eaddress = "Required";
-    }
-    if ($er == 0) {
-        $sql = "INSERT INTO suppliers(NAME, EMAIL, CONTACT_NUMBER, ADDRESS) 
-            VALUES ('$name', '$email', '$contact','$address')";
-        if (mysqli_query($conn, $sql)) {
-
-            echo "<script>
-                alert('Add Succesfully');
-                window.location.href = 'manage_supplier.php';
-                </script>";
-        }
-    }
-}
 
 ?>
 
@@ -67,13 +19,13 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <form>
+                <form action="#" method="post" id="add_form">
                     <div class="row">
                         <div class="col-sm-6 col-md-3">
                             <div class="form-group">
                                 <label>Supplier Name<span class="text-danger">*</span></label>
                                 <select class="form-control" name="supplier" id="">
-                                    <option value="">Select Supplier Name</option>
+                                    <!-- <option value="">Select Supplier Name</option> -->
                                     <?php
                                     $sql3 = "select * from suppliers";
                                     $table3 = mysqli_query($conn, $sql3);
@@ -88,9 +40,9 @@ if (isset($_POST['submit'])) {
                             <div class="form-group">
                                 <label>Payment Type<span class="text-danger">*</span></label>
                                 <select class="form-control" name="payment-type">
-                                    <option value="0">Cash Payment</option>
-                                    <option value="1">Banking</option>
-                                    <option value="2">Payment Due</option>
+                                    <option value="Cash payment">Cash Payment</option>
+                                    <option value="Banking">Banking</option>
+                                    <option value="Payment Due">Payment Due</option>
                                 </select>
                             </div>
                         </div>
@@ -104,7 +56,7 @@ if (isset($_POST['submit'])) {
                                 <table class="table table-hover table-white">
                                     <thead>
                                         <tr>
-                                            <th style="width: 120px;">#</th>
+                                            
                                             <th  class="col-sm-2">Medicine</th>
 
                                             <th >Rate</th>
@@ -116,28 +68,26 @@ if (isset($_POST['submit'])) {
                                     </thead>
                                     <tbody>
                                         <tr id="master">
+                                            
                                             <td>
-                                                <input class="form-control sl" type="text" >
-                                            </td>
-                                            <td>
-                                                <input class="form-control product" type="text" >
+                                                <input class="form-control product" name="product[]" type="text" required>
                                             </td>
 
                                             <td>
-                                                <input class="form-control rate"  type="text">
+                                                <input class="form-control rate" name="rate[]"  type="text" required>
                                             </td>
                                             <td>
-                                                <input class="form-control quantity"  type="text">
+                                                <input class="form-control quantity" name="quantity[]"  type="text" required>
                                             </td>
                                             <td>
-                                                <input class="form-control form-amt amount" readonly=""  type="text">
+                                                <input class="form-control form-amt amount" name="amount[]"  readonly=""  type="text" required>
                                             </td>
                                             <td>
-                                                <!-- <a href="#" class="add" class="text-success font-18" title="Add"><i class="fa fa-plus"></i></a> -->
+                                                
                                                 <input type="button" class="btn btn-primary add" value="ADD">
                                             </td>
                                             <td>
-                                                <!-- <input type="button" value="&times;" class="del" /> -->
+                                                
                                                 <input type="button" class="btn btn-danger del" value="REMOVE">
                                             </td>
                                         </tr>
@@ -146,7 +96,10 @@ if (isset($_POST['submit'])) {
                                     <tfoot>
                                         <tr>
                                             <th colspan="2">Total</th>
-                                            <th><span id="total_qty"></span> Items</th>
+                                            <th>
+                                                <span id="total_qty"></span> Items
+                                                <!-- <input class="form-control" type="number" id="total_qty" name="total_qty"> Items -->
+                                            </th>
                                             <th></th>
                                             <th>Grand Total</th>
                                             <th><span id="total_amt"></span> tk</th>
@@ -155,25 +108,11 @@ if (isset($_POST['submit'])) {
                                     </tfoot>
                                 </table>
                             </div>
-                            <!-- <div class="table-responsive">
-                                <table class="table table-hover table-white">
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="2">Total</th>
-                                            <th><span id="total_qty"></span> Items</th>
-                                            <th></th>
-                                            <th>Grand Total</th>
-                                            <th><span id="total_amt"></span> tk</th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div> -->
                         </div>
                     </div>
                     <div class="text-center m-t-20">
                         <button class="btn btn-grey submit-btn m-r-10">Save & Send</button>
-                        <button class="btn btn-primary submit-btn">Save</button>
+                        <button class="btn btn-primary submit-btn" id="add_btn">Save</button>
                     </div>
                 </form>
             </div>
@@ -229,6 +168,27 @@ if (isset($_POST['submit'])) {
 
             });
         });
+
+        $("#add_form").submit(function(e){
+            e.preventDefault();
+            var total_qty = $('#total_qty').text();
+            var total_amt = $('#total_amt').text();
+           
+            $("#add_btn").val('adding....');
+            $.ajax({
+                url: 'purchase_action.php',
+                method: 'post',
+                data: $(this).serialize() + "&total_qty="+total_qty + "&total_amt="+total_amt,
+                success: function(data){
+                alert('Purchase Succesfully'); 
+                // alert('Purchase Succesfully');
+                window.location.href = 'manage_purchase.php';
+                
+                }
+                
+            });
+        });
+
 
     });
 </script>
