@@ -14,7 +14,7 @@ include('include/sidebar.php');
     <div class="content">
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="page-title">Add Purchase</h4>
+                <h4 class="page-title">Add Sale</h4>
             </div>
         </div>
         <div class="row">
@@ -23,11 +23,11 @@ include('include/sidebar.php');
                     <div class="row">
                         <div class="col-sm-6 col-md-3">
                             <div class="form-group">
-                                <label>Supplier Name<span class="text-danger">*</span></label>
-                                <select class="form-control" name="supplier" id="">
-                                    <!-- <option value="">Select Supplier Name</option> -->
+                                <label>Customer Name<span class="text-danger">*</span></label>
+                                <select class="form-control" name="customer" id="">
+                                    <option value="">Select Customer Name</option>
                                     <?php
-                                    $sql3 = "select * from suppliers";
+                                    $sql3 = "select * from customers";
                                     $table3 = mysqli_query($conn, $sql3);
                                     while ($row3 = mysqli_fetch_assoc($table3)) {
                                     ?>
@@ -46,9 +46,6 @@ include('include/sidebar.php');
                                 </select>
                             </div>
                         </div>
-
-
-
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
@@ -176,13 +173,13 @@ include('include/sidebar.php');
            
             $("#add_btn").val('adding....');
             $.ajax({
-                url: 'purchase_action.php',
+                url: 'sale_action.php',
                 method: 'post',
                 data: $(this).serialize() + "&total_qty="+total_qty + "&total_amt="+total_amt,
                 success: function(data){
-                alert('Purchase Succesfully'); 
+                alert('Sale Succesfully'); 
                 // alert('Purchase Succesfully');
-                window.location.href = 'manage_purchase.php';
+                window.location.href = 'manage_sale.php';
                 
                 }
                 

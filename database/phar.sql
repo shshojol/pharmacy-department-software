@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2022 at 06:40 PM
+-- Generation Time: Mar 06, 2022 at 07:27 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -43,24 +43,6 @@ INSERT INTO `admin` (`id`, `email`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_credentials`
---
-
-CREATE TABLE `admin_credentials` (
-  `USERNAME` varchar(50) COLLATE utf16_bin NOT NULL,
-  `PASSWORD` varchar(50) COLLATE utf16_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
-
---
--- Dumping data for table `admin_credentials`
---
-
-INSERT INTO `admin_credentials` (`USERNAME`, `PASSWORD`) VALUES
-('admin', 'admin123');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `customers`
 --
 
@@ -78,14 +60,14 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`ID`, `NAME`, `CONTACT_NUMBER`, `ADDRESS`, `DOCTOR_NAME`, `DOCTOR_NUMBER`) VALUES
-(4, 'Kiran Suthar123', '1234567690', 'Andheri East', 'Anshari', 'Andheri East'),
-(6, 'Aditya', '7365687269', 'Virar West', 'Xyz', 'Virar West'),
-(11, 'Shivam Tiwari', '6862369896', 'Dadar West', 'Dr Kapoor', 'Dadar East'),
-(13, 'Varsha Suthar', '7622369694', 'Rani Station', 'Dr Ramesh', 'Rani Station'),
-(14, 'Prakash Bhattarai', '9802851472', 'Pokhara-16, Dhikidada', 'Hari Bahadur', 'Matepani-12'),
-(15, 'sahid hasan sojol', '0168262342', 'kallanpur', 'adsfasdf', '654'),
+(4, 'MD Tarikul islam', '1234567690', 'Motijhil', 'Dr.Suhan khan', '0168523523'),
+(6, 'Aditya islam', '7365687269', 'Motijhil', 'Dr. Hasan mahamud', '0155822665'),
+(11, 'Sagor Tiwari', '6862369896', 'Mohammadpur', 'Dr Khan', '01672522622'),
+(13, 'Md. Sahin alom', '7622369694', 'kallanpur,mirpur,dhaka', 'Dr Najmul hoque', '016716554212'),
+(14, 'zamil hasan', '9802851472', 'mirpur 1', 'Dr. Imrul hasan', '0168465265'),
+(15, 'sahid hasan sojol', '0168262342', 'kallanpur', 'Dr. al amin', '6545496326'),
 (16, 'abdur', '0125423', 'chottogram', 'hasan', '01551255'),
-(22, 'rashid111', '01682', 'mirpur111', 'Dr.kamarl hasan111', '01682623426111'),
+(22, 'rashid ahmed', '01682596652', 'mirpur', 'Dr.kamarl hasan', '01682623426111'),
 (24, 'Tawhid', '0174561111', 'chottogram', 'DR.imran', '58426842');
 
 -- --------------------------------------------------------
@@ -135,67 +117,72 @@ CREATE TABLE `medicines` (
 INSERT INTO `medicines` (`ID`, `NAME`, `PACKING`, `GENERIC_NAME`, `SUPPLIER_NAME`, `QUANTITY`, `MRP`, `RATE`) VALUES
 (1, 'Nicip Plus', '10tab', 'Paracetamole', '1', '', '', ''),
 (2, 'Crosin', '10tab', 'Hdsgvkvajkcbja', '2', '', '', ''),
-(4, 'Dolo 650', '15tab', 'paracetamole', '10', '', '', ''),
+(4, 'Dolo 650', '15tab', 'paracetamole', '31', '', '', ''),
 (5, 'Gelusil', '10tab', 'mint fla', '12', '', '', ''),
-(6, 'NAPA', '15tab', 'NAPA', '11', '', '', ''),
-(8, 'asha', '10tab', 'asha', '14', '', '', ''),
+(6, 'NAPA', '15tab', 'NAPA', '2', '', '', ''),
+(8, 'Atropine', '10tab', 'Atropine', '33', '', '', ''),
 (9, 'tona', '20tab', 'tona', '31', '', '', ''),
-(10, 'Ace123', '11tab', 'ace123', '2', '', '', ''),
-(11, 'histarsin', '50tab', 'histasin', '34', '', '', '');
+(10, 'Ace', '10tab', 'ace', '2', '', '', ''),
+(11, 'histarsin', '10tab', 'histasin', '34', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `medicines_stock`
+-- Table structure for table `new_purchase`
 --
 
-CREATE TABLE `medicines_stock` (
-  `ID` int(11) NOT NULL,
-  `NAME` varchar(100) COLLATE utf16_bin NOT NULL,
-  `BATCH_ID` varchar(20) COLLATE utf16_bin NOT NULL,
-  `EXPIRY_DATE` varchar(10) COLLATE utf16_bin NOT NULL,
-  `QUANTITY` int(11) NOT NULL,
-  `MRP` double NOT NULL,
-  `RATE` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
-
---
--- Dumping data for table `medicines_stock`
---
-
-INSERT INTO `medicines_stock` (`ID`, `NAME`, `BATCH_ID`, `EXPIRY_DATE`, `QUANTITY`, `MRP`, `RATE`) VALUES
-(1, 'Crosin', 'CROS12', '12/34', 2, 2626, 26),
-(2, 'Gelusil', 'G327', '12/42', 0, 15, 12),
-(3, 'Dolo 650', 'DOLO327', '01/23', 3, 30, 24),
-(4, 'Nicip Plus', 'NI325', '05/22', 3, 32.65, 28);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `purchase`
---
-
-CREATE TABLE `purchase` (
-  `INVOICE_NUMBER` int(11) NOT NULL,
-  `PURCHASE_DATE` date NOT NULL,
-  `TOTAL_AMOUNT` varchar(255) NOT NULL,
-  `QUANTITY` varchar(255) NOT NULL
+CREATE TABLE `new_purchase` (
+  `invoice_number` int(11) NOT NULL,
+  `purchase_date` date NOT NULL DEFAULT current_timestamp(),
+  `supplier_name` varchar(255) NOT NULL,
+  `payment_type` varchar(255) NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `rate` varchar(255) NOT NULL,
+  `qty` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `total_qty` varchar(255) NOT NULL,
+  `total_amt` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `new_purchase`
+--
+
+INSERT INTO `new_purchase` (`invoice_number`, `purchase_date`, `supplier_name`, `payment_type`, `product`, `rate`, `qty`, `amount`, `total_qty`, `total_amt`) VALUES
+(103, '2022-03-05', '1', 'Cash payment', 'Histarsin,Tofen', '20,15', '5,10', '100,150', '15', '250'),
+(106, '2022-03-05', '34', 'Payment Due', 'Histarsin,Histarsin1', '50,500', '2,3', '100,1500', '5', '1600'),
+(123, '2022-03-05', '1', 'Cash payment', 'demo', '20', '5', '100', '5', '100'),
+(124, '2022-03-07', '1', 'Cash payment', 'demo', '20', '2', '40', '2', '40'),
+(125, '2022-03-07', '13', 'Banking', 'Histarsin', '20', '5', '100', '5', '100');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchases`
+-- Table structure for table `sale`
 --
 
-CREATE TABLE `purchases` (
-  `SUPPLIER_NAME` varchar(100) COLLATE utf16_bin NOT NULL,
-  `INVOICE_NUMBER` int(11) NOT NULL,
-  `VOUCHER_NUMBER` int(11) NOT NULL,
-  `PURCHASE_DATE` varchar(10) COLLATE utf16_bin NOT NULL,
-  `TOTAL_AMOUNT` double NOT NULL,
-  `PAYMENT_STATUS` varchar(20) COLLATE utf16_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
+CREATE TABLE `sale` (
+  `sale_invoice` int(11) NOT NULL,
+  `sale_date` date NOT NULL DEFAULT current_timestamp(),
+  `customer_name` int(11) NOT NULL,
+  `payment_type` varchar(255) NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `rate` varchar(255) NOT NULL,
+  `qty` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `total_qty` varchar(255) NOT NULL,
+  `total_amt` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sale`
+--
+
+INSERT INTO `sale` (`sale_invoice`, `sale_date`, `customer_name`, `payment_type`, `product`, `rate`, `qty`, `amount`, `total_qty`, `total_amt`) VALUES
+(501, '2022-03-05', 4, 'Payment Due', 'napa,napa extra', '50,500', '5,5', '250,2500', '10', '2750'),
+(502, '2022-03-06', 15, 'Banking', 'demo4,demo1', '50,200', '2,5', '100,1000', '7', '1100'),
+(503, '2022-03-06', 4, 'Payment Due', 'seclo,seclo 2', '16,160', '20,20', '320,3200', '40', '3520'),
+(504, '2022-03-07', 4, 'Cash payment', 'napa,seclo', '5,16', '10,10', '50,160', '20', '210');
 
 -- --------------------------------------------------------
 
@@ -216,16 +203,15 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`ID`, `NAME`, `EMAIL`, `CONTACT_NUMBER`, `ADDRESS`) VALUES
-(1, 'Desai Pharma123', 'desai@gmail.com123', '994111', 'Mahim East123'),
-(2, 'BDPL PHARMA123', 'bdpl@gmail.com', '8645632963', 'Santacruz West'),
-(9, 'Kiran Pharma', 'kiranpharma@gmail.com', '7638683637', 'Andheri East'),
-(11, 'Dfnsfndfndf', 'fnsn', '5475734385', 'Ndnss4yrhrhdhrdhrh'),
-(12, 'SS Distributors', 'ssdis@gamil.com', '3867868752', 'Matunga West'),
-(13, 'Avceve', 'ehh', '3466626226', 'Eteh266266262'),
-(31, 'sahid hasan sojol', 'shojolsh@gmail.com', '0168262342', 'kallanpur'),
-(33, 'al amin', 'ali@gmail.com', '546526655', 'dhanmondi'),
-(34, 'Sultan pharma', 'sul@yahoo.com', '5426584126', 'jatrabari'),
-(35, 'sujon', 'shojolsh@gmail.com', '0168262342', 'kallanpur');
+(1, 'ACI Limited', 'desai@gmail.com', '99411126542', 'Gazipur'),
+(2, 'The ACME Laboratories Ltd', 'bdpl@gmail.com', '8645632963', 'Jatrabari'),
+(9, 'Beacon Pharmaceuticals', 'kiranpharma@gmail.com', '7638683637', 'savar'),
+(12, 'Beximco Pharma', 'ssdis@gamil.com', '3867868752', 'savar'),
+(13, 'Eskayef Pharmaceuticals Ltd.', 'ehh@yahoo.com', '3466626226', 'narayangonj'),
+(31, 'Incepta Pharmaceuticals', 'shojolsh@gmail.com', '0168262342', 'mirpur'),
+(33, 'Orion Pharma (Bangladesh)', 'ali@gmail.com', '546526655', 'dhanmondi'),
+(34, 'Renata Limited', 'sul@yahoo.com', '5426584126', 'jatrabari'),
+(35, 'Square Pharmaceuticals', 'shojolsh@gmail.com', '0168262342', 'kallanpur');
 
 --
 -- Indexes for dumped tables
@@ -236,12 +222,6 @@ INSERT INTO `suppliers` (`ID`, `NAME`, `EMAIL`, `CONTACT_NUMBER`, `ADDRESS`) VAL
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `admin_credentials`
---
-ALTER TABLE `admin_credentials`
-  ADD PRIMARY KEY (`USERNAME`);
 
 --
 -- Indexes for table `customers`
@@ -262,23 +242,16 @@ ALTER TABLE `medicines`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `medicines_stock`
+-- Indexes for table `new_purchase`
 --
-ALTER TABLE `medicines_stock`
-  ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `BATCH_ID` (`BATCH_ID`);
+ALTER TABLE `new_purchase`
+  ADD PRIMARY KEY (`invoice_number`);
 
 --
--- Indexes for table `purchase`
+-- Indexes for table `sale`
 --
-ALTER TABLE `purchase`
-  ADD PRIMARY KEY (`INVOICE_NUMBER`);
-
---
--- Indexes for table `purchases`
---
-ALTER TABLE `purchases`
-  ADD PRIMARY KEY (`VOUCHER_NUMBER`);
+ALTER TABLE `sale`
+  ADD PRIMARY KEY (`sale_invoice`);
 
 --
 -- Indexes for table `suppliers`
@@ -315,22 +288,16 @@ ALTER TABLE `medicines`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `medicines_stock`
+-- AUTO_INCREMENT for table `new_purchase`
 --
-ALTER TABLE `medicines_stock`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `new_purchase`
+  MODIFY `invoice_number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
--- AUTO_INCREMENT for table `purchase`
+-- AUTO_INCREMENT for table `sale`
 --
-ALTER TABLE `purchase`
-  MODIFY `INVOICE_NUMBER` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `purchases`
---
-ALTER TABLE `purchases`
-  MODIFY `VOUCHER_NUMBER` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `sale`
+  MODIFY `sale_invoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
 
 --
 -- AUTO_INCREMENT for table `suppliers`

@@ -4,14 +4,14 @@
                     <ul>
                         <li class="menu-title">Main</li>
                         <li class="active">
-                            <a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
                         <li class="submenu">
-							<a href="#"><i class="fa fa-user"></i> <span> Invoice </span> <span class="menu-arrow"></span></a>
+							<a href="#"><i class="fa fa-user"></i> <span> Sales </span> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
-								<li><a href="new_invoice.php">New Invoice</a></li>
-								<li><a href="manage_invoice.php">Manage Invoice</a></li>
+								<li><a href="add_sale.php">Add Sale</a></li>
+								<li><a href="manage_sale.php">Manage Sales</a></li>
 							</ul>
 						</li>
                         <li class="submenu">
@@ -26,7 +26,7 @@
 							<ul style="display: none;">
 								<li><a href="add_medicine.php">Add Medicine</a></li>
 								<li><a href="manage_medicine.php">Manage Medicine</a></li>
-								<li><a href="manage_medicine_stock.php">Manage Medicine Stock</a></li>
+								<!-- <li><a href="manage_medicine_stock.php">Manage Medicine Stock</a></li> -->
 							</ul>
 						</li>
                         <li class="submenu">
