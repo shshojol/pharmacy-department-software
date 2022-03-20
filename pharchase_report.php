@@ -18,21 +18,23 @@ include('include/sidebar.php');
         </div>
         <form action="" method="post">
             <div class="row">
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-2">
                     <div class="form-group">
                         <label>Start Date<span class="text-danger" >*</span></label>
                         <input type="date" class="form-control" name="start_date">
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-2">
                     <div class="form-group">
                         <label>End Date<span class="text-danger">*</span></label>
                         <input type="date" class="form-control" name="end_date">
                     </div>
                 </div>
+                    <div class="form-group">  
+                        <input type="submit" class="form-control btn btn-primary" name="submit" value="Search" style="margin-top:29px;">
+                    </div>
                     <div class="form-group">
-                        <label for=""></label>
-                        <input type="submit" class="form-control btn btn-primary" name="submit" value="submit">
+                        <input type="submit" class="form-control btn btn-primary" name="reset" value="Reset" style="margin-top:29px;">
                     </div>
             </div>
         </form>
@@ -54,6 +56,9 @@ include('include/sidebar.php');
                         </thead>
                         <tbody>
                             <?php
+                            if(isset($_POST['reset'])){
+                                $sql = "select * from new_purchase order by invoice_number DESC";
+                            }
                                 if(isset($_POST['submit'])){
                                     $start_date = $_POST['start_date'];
                                     $end_date = $_POST['end_date'];
@@ -67,7 +72,7 @@ include('include/sidebar.php');
                                     }else{}
 
                                 }else{
-                                    $sql = "select * from new_purchase";
+                                    $sql = "select * from new_purchase order by invoice_number DESC";
                                 }
                             
                                 

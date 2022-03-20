@@ -18,21 +18,25 @@ include('include/sidebar.php');
         </div>
         <form action="" method="post">
             <div class="row">
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-2">
                     <div class="form-group">
                         <label>Start Date<span class="text-danger" >*</span></label>
                         <input type="date" class="form-control" name="start_date">
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-2">
                     <div class="form-group">
                         <label>End Date<span class="text-danger">*</span></label>
                         <input type="date" class="form-control" name="end_date">
                     </div>
                 </div>
+
+
                     <div class="form-group">
-                        <label for=""></label>
-                        <input type="submit" class="form-control btn btn-primary" name="submit" value="submit">
+                        <input type="submit" class="form-control btn btn-primary" name="submit" value="Search" style="margin-top:29px;">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="form-control btn btn-primary" name="reset" value="Reset" style="margin-top:29px;">
                     </div>
             </div>
         </form>
@@ -54,9 +58,13 @@ include('include/sidebar.php');
                         </thead>
                         <tbody>
                             <?php
+                            if(isset($_POST['reset'])){
+                                $sql = "select * from sale order by sale_invoice DESC";
+                            }
                             if(isset($_POST['submit'])){
                                 $start_date = $_POST['start_date'];
                                 $end_date = $_POST['end_date'];
+ 
 
                            
                                 $sql = "select * from sale";
@@ -68,7 +76,7 @@ include('include/sidebar.php');
                                 }else{}
 
                             }else{
-                                $sql = "select * from sale"; 
+                                $sql = "select * from sale order by sale_invoice DESC"; 
                             }
                             $table = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($table)) {
@@ -125,6 +133,8 @@ include('include/sidebar.php');
         $(".amount").each(function() {   
             $('#total_amt').text( z = z + parseInt($(this).text()) );               
          });
+
+         
     });
 </script>
 </body>

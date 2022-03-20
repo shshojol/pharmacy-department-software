@@ -36,14 +36,14 @@ if(!isset($_SESSION['id']))
             $er++;
             $eaddress = "Required";
         }
-        if(empty($doctor)){
-            $er++;
-            $edoctor = "Required";
-        }
-        if(empty($doc_number)){
-            $er++;
-            $edoc_number = "Required";
-        }
+        // if(empty($doctor)){
+        //     $er++;
+        //     $edoctor = "Required";
+        // }
+        // if(empty($doc_number)){
+        //     $er++;
+        //     $edoc_number = "Required";
+        // }
         if($er == 0){
             $sql = "UPDATE customers SET NAME='$name', CONTACT_NUMBER = '$contact', ADDRESS = '$address',
             DOCTOR_NAME ='$doctor', DOCTOR_NUMBER ='$doc_number' WHERE id = ".$id;
@@ -70,13 +70,13 @@ if(!isset($_SESSION['id']))
             <div class="content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h4 class="page-title">Add Customer</h4>
+                        <h4 class="page-title">Update Customer</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card-box">
-                            <h4 class="card-title">Add Customer form</h4>
+                            <h4 class="card-title">Update Customer form</h4>
                             <form action="" method='post'>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">Name</label>
@@ -99,13 +99,13 @@ if(!isset($_SESSION['id']))
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">Doctor's name</label>
                                     <div class="col-md-9">
-                                        <input type="text" name='doctor' value="<?php echo $row2['DOCTOR_NAME']; ?>" class="form-control"><?php echo $edoctor; ?>
+                                        <input type="text" name='doctor' value="<?php echo $row2['DOCTOR_NAME']; ?>" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">Doctor's Contact Number</label>
                                     <div class="col-md-9">
-                                        <input type="text" name='doc_number' value="<?php echo $row2['DOCTOR_NUMBER']; ?>" class="form-control"><?php echo $edoc_number; ?>
+                                        <input type="text" name='doc_number' value="<?php echo $row2['DOCTOR_NUMBER']; ?>" class="form-control">
                                     </div>
                                 </div>
                                 <div class="text-right">

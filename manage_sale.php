@@ -16,6 +16,26 @@ include('include/sidebar.php');
                 <h4 class="page-title">Manage Sale</h4>
             </div>
         </div>
+        <form action="" method="post">
+            <div class="row">
+                <div class="col-sm-6 col-md-2">
+                    <div class="form-group">
+                        <input type="date" class="form-control" name="start_date">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2">
+                    <div class="form-group">
+                        <input type="date" class="form-control" name="end_date">
+                    </div>
+                </div>
+                     <div class="form-group">
+                        <input type="submit" class="form-control btn btn-primary" name="submit" value="Search" style="margin-top:29px;">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="form-control btn btn-primary" name="reset" value="Reset" style="margin-top:29px;">
+                    </div>
+            </div>
+        </form>
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -35,7 +55,7 @@ include('include/sidebar.php');
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "select * from sale";
+                                $sql = "select * from sale order by sale_invoice DESC";
                                 $table = mysqli_query($conn, $sql);
                                 while($row = mysqli_fetch_assoc($table)){
                             ?>

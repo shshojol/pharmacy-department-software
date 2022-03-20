@@ -2,13 +2,13 @@
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class="menu-title">Main</li>
-                        <li class="active">
+                        
+                        <li class="">
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
                         <li class="submenu">
-							<a href="#"><i class="fa fa-user"></i> <span> Sales </span> <span class="menu-arrow"></span></a>
+							<a href="#"><i class="fa fa-shopping-basket"></i> <span> Sales </span> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
 								<li><a href="add_sale.php">Add Sale</a></li>
 								<li><a href="manage_sale.php">Manage Sales</a></li>
@@ -22,7 +22,7 @@
 							</ul>
 						</li>
                         <li class="submenu">
-							<a href="#"><i class="fa fa-user"></i> <span> Medicine </span> <span class="menu-arrow"></span></a>
+							<a href="#"><i class="fa fa-medkit"></i> <span> Medicine </span> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
 								<li><a href="add_medicine.php">Add Medicine</a></li>
 								<li><a href="manage_medicine.php">Manage Medicine</a></li>
@@ -30,21 +30,21 @@
 							</ul>
 						</li>
                         <li class="submenu">
-							<a href="#"><i class="fa fa-user"></i> <span> Supplier </span> <span class="menu-arrow"></span></a>
+							<a href="#"><i class="fa fa-user-circle-o"></i> <span> Supplier </span> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
 								<li><a href="add_supplier.php">Add Supplier</a></li>
 								<li><a href="manage_supplier.php">Manage Supplier</a></li>
 							</ul>
 						</li>
                         <li class="submenu">
-							<a href="#"><i class="fa fa-user"></i> <span> Purchase </span> <span class="menu-arrow"></span></a>
+							<a href="#"><i class="fa fa-shopping-cart"></i> <span> Purchase </span> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
 								<li><a href="add_purchase.php">Add Purchase</a></li>
 								<li><a href="manage_purchase.php">Manage Purchase</a></li>
 							</ul>
 						</li>
                         <li class="submenu">
-							<a href="#"><i class="fa fa-user"></i> <span> Report </span> <span class="menu-arrow"></span></a>
+							<a href="#"><i class="fa fa-hospital-o"></i> <span> Report </span> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
 								<li><a href="sales_report.php">Sales Report</a></li>
 								<li><a href="pharchase_report.php">Pharchase Report</a></li>
@@ -65,3 +65,4 @@
                 </div>
             </div>
         </div>
+		

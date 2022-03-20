@@ -57,9 +57,6 @@ include('include/sidebar.php');
                                 </td>
                             </tr>
                             <?php } ?>
-                            
-                            
-                         
                         </tbody>
                     </table>
 

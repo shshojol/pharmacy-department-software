@@ -28,7 +28,7 @@ if(!isset($_SESSION['id']))
         $doc_number = $_POST['doc_number'];
 
         $er = 0;
-        if(empty($name)){
+        if($name == ""){
             $er++;
             $ename = "Required";
         }
@@ -40,14 +40,14 @@ if(!isset($_SESSION['id']))
             $er++;
             $eaddress = "Required";
         }
-        if(empty($doctor)){
-            $er++;
-            $edoctor = "Required";
-        }
-        if(empty($doc_number)){
-            $er++;
-            $edoc_number = "Required";
-        }
+        // if(empty($doctor)){
+        //     $er++;
+        //     $edoctor = "Required";
+        // }
+        // if(empty($doc_number)){
+        //     $er++;
+        //     $edoc_number = "Required";
+        // }
         if($er == 0){
             $sql = "INSERT INTO customers(NAME, CONTACT_NUMBER, ADDRESS, DOCTOR_NAME, DOCTOR_NUMBER) 
             VALUES ('$name','$contact','$address','$doctor','$doc_number')";
@@ -98,13 +98,13 @@ if(!isset($_SESSION['id']))
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">Doctor's name</label>
                                     <div class="col-md-9">
-                                        <input type="text" name='doctor' value='<?php echo $doctor; ?>' class="form-control"><?php echo $edoctor; ?>
+                                        <input type="text" name='doctor' value='<?php echo $doctor; ?>' class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">Doctor's Contact Number</label>
                                     <div class="col-md-9">
-                                        <input type="text" name='doc_number' value='<?php echo $doc_number; ?>' class="form-control"><?php echo $edoc_number; ?>
+                                        <input type="text" name='doc_number' value='<?php echo $doc_number; ?>' class="form-control">
                                     </div>
                                 </div>
                                 <div class="text-right">
