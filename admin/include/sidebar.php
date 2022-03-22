@@ -7,6 +7,10 @@
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 
+						<li class="">
+                            <a href="order.php"><i class="fa fa-dashboard"></i> <span>Order</span></a>
+                        </li>
+
                         <li class="submenu">
 							<a href="#"><i class="fa fa-shopping-basket"></i> <span> Sales </span> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">

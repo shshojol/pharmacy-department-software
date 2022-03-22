@@ -21,24 +21,64 @@ if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $packing = $_POST['packing'];
     $generic_name = $_POST['generic_name'];
-    $quantity = $_POST['quantity'];
-    $mrp = $_POST['mrp'];
+    //$quantity = $_POST['quantity'];
     $rate = $_POST['rate'];
     $supplier = $_POST['supplier'];
 
-    $er = 0;
 
-    if ($er == 0) {
-        $sql = "INSERT INTO medicines(NAME, PACKING, GENERIC_NAME, SUPPLIER_NAME, QUANTITY, MRP, RATE) 
-            VALUES ('$name', '$packing', '$generic_name','$supplier', '$quantity', '$mrp', '$rate')";
-        if (mysqli_query($conn, $sql)) {
+    $image = $_FILES['image']['name'];
+        $target_dr_name = "upload/medicine/";
+        $target_file_dr_image = $target_dr_name . basename($_FILES['image']['name']);
+        
+        // Select file type
+        $imageFileType = strtolower(pathinfo($target_file_dr_image, PATHINFO_EXTENSION));
+        
+        // valid file extansion
+        $extentsions_arr = array("jpg","jepg","png");
 
-            echo "<script>
-                alert('Add Succesfully');
-                window.location.href = 'manage_medicine.php';
-                </script>";
-        }
-    }
+
+         // Check extention is valid or not
+         if(in_array($imageFileType, $extentsions_arr)) {
+            
+            // Upload file
+            $is_upload_dr_image = move_uploaded_file($_FILES['image']['tmp_name'], $target_dr_name.$image);
+            
+            if($is_upload_dr_image) {
+                
+                // Deprtment Add Query
+                $sql_serv_insert =  "INSERT INTO medicines(NAME, PACKING, GENERIC_NAME, SUPPLIER_NAME, image, RATE) 
+                VALUES ('$name', '$packing', '$generic_name','$supplier','$image', '$rate')";
+               
+                $sql_serv_result = $conn->query($sql_serv_insert);
+
+                if($sql_serv_result === TRUE) {
+                  echo "<script>
+                  alert('Add Succesfully');
+                  window.location.href = 'manage_medicine.php';
+                  </script>";  
+                } else {
+                  echo "<script>alert('Sorry ! Could not add the medicine, Try Again');</script>"; 
+                }
+            } else {
+                echo "<script>alert('Sorry ! Could not upload image, Try Again');</script>";  
+            }
+        } else {
+           echo "<script>alert('Sorry ! Inalid extension detected, Try Again');</script>"; 
+        }  
+
+    // $er = 0;
+
+    // if ($er == 0) {
+    //     $sql = "INSERT INTO medicines(NAME, PACKING, GENERIC_NAME, SUPPLIER_NAME, QUANTITY, MRP, RATE) 
+    //         VALUES ('$name', '$packing', '$generic_name','$supplier', '$quantity', '$mrp', '$rate')";
+    //     if (mysqli_query($conn, $sql)) {
+
+    //         echo "<script>
+    //             alert('Add Succesfully');
+    //             window.location.href = 'manage_medicine.php';
+    //             </script>";
+    //     }
+    // }
 }
 
 
@@ -74,7 +114,7 @@ if (isset($_POST['add_supplier'])) {
             <div class="col-md-6">
                 <div class="card-box">
                     <h4 class="card-title">Add Medicine form</h4>
-                    <form action="" method='post'>
+                    <form action="" method='post' enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Medicine Name</label>
                             <div class="col-md-5">
@@ -91,39 +131,30 @@ if (isset($_POST['add_supplier'])) {
                             </div>
                         </div>
 
-                        <!-- <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Quantity</label>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Medicine Rate</label>
                             <div class="col-md-9">
-                                <input type="text" name='quantity' placeholder="Medicine Quantity" value='<?php echo $quantity; ?>' class="form-control" required>
+                                <input type="text" name='rate' placeholder="Medicine Rate(BDT)" value='<?php echo $rate; ?>' class="form-control" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">MRP</label>
-                            <div class="col-md-9">
-                                <input type="text" name='mrp' placeholder="Medicine Mrp" value='<?php echo $mrp; ?>' class="form-control" required>
-                            </div>
+                            <label class="col-md-3 col-form-label">Medicine Image</label>
+                            <input class="col-md-9" type="file" class="form-control border" name="image" required>
                         </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Rate</label>
-                            <div class="col-md-9">
-                                <input type="text" name='rate' placeholder="Medicine Rate" value='<?php echo $rate; ?>' class="form-control" required>
-                            </div>
-                        </div> -->
 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Supplier</label>
                             <div class="col-md-9">
-                                
+
                                 <select class="form-control" name="supplier" id="">
-                                    <option value="" >Select Supplier Name</option>
+                                    <option value="">Select Supplier Name</option>
                                     <?php
-                                        $sql3 = "select * from suppliers";
-                                        $table3 = mysqli_query($conn , $sql3);
-                                        while($row3 = mysqli_fetch_assoc($table3)){
+                                    $sql3 = "select * from suppliers";
+                                    $table3 = mysqli_query($conn, $sql3);
+                                    while ($row3 = mysqli_fetch_assoc($table3)) {
                                     ?>
-                                    <option value="<?php echo $row3['ID']; ?>" ><?php echo  $row3['NAME']; ?></option>
+                                        <option value="<?php echo $row3['ID']; ?>"><?php echo  $row3['NAME']; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>

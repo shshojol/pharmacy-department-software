@@ -28,6 +28,8 @@ include('include/sidebar.php');
                                 <th>Packing</th>
                                 <th>Generic Name</th>
                                 <th>Supplier</th>
+                                <th>Image</th>
+                                <th>Rate</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
@@ -55,6 +57,8 @@ include('include/sidebar.php');
                                     
                                     ?>
                                 </td>
+                                <td style=""><img style="height: 60px; width: 80px;" src="upload/medicine/<?php echo $row['image']; ?>" /></td>
+                                <td><?php echo $row['RATE']; ?></td>
                                 <td class="text-right">
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
